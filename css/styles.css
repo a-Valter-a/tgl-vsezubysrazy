@@ -217,6 +217,9 @@ input {
 }
 
 .hero__title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0 0 12px;
   font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 400;
@@ -224,15 +227,50 @@ input {
   overflow-wrap: break-word;
 }
 
-.hero__title strong {
+.hero__title-lead {
   font-weight: 700;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.15;
+}
+
+.hero__title-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.hero__title-tags-sep {
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero__title .hero__highlight {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-size: clamp(20px, 2.4vw, 28px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.hero__highlight {
+  font-weight: 700;
+  color: var(--color-accent);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.18);
 }
 
 .hero__subtitle {
   margin: 0 0 20px;
-  font-size: clamp(18px, 2.2vw, 28px);
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: clamp(17px, 2vw, 26px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero__subtitle .hero__highlight {
+  font-size: 1.12em;
 }
 
 .hero__price {
@@ -615,11 +653,15 @@ input {
   padding: 56px 0;
 }
 
+.prosthesis:has(+ .consultation-info) {
+  padding-bottom: 28px;
+}
+
 .prosthesis__inner {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-  gap: 40px;
-  align-items: start;
+  grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
 }
 
 .prosthesis__media {
@@ -627,24 +669,30 @@ input {
 }
 
 .prosthesis__media img {
+  display: block;
   width: 100%;
+  height: auto;
+  aspect-ratio: 1300 / 766;
+  object-fit: contain;
+  object-position: center;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
 }
 
 .prosthesis__text {
-  margin: 0 0 16px;
+  margin: 0 0 28px;
   font-size: 17px;
   line-height: 1.45;
   overflow-wrap: break-word;
 }
 
 .prosthesis__title {
-  margin: 0 0 28px;
+  margin: 0 0 16px;
   font-size: clamp(20px, 2.5vw, 28px);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.35;
   overflow-wrap: break-word;
+  color: var(--color-accent);
 }
 
 .prosthesis__grid {
@@ -656,7 +704,7 @@ input {
 .prosthesis__item {
   display: flex;
   gap: 12px;
-  align-items: flex-start;
+  align-items: center;
   min-width: 0;
 }
 
@@ -674,11 +722,22 @@ input {
   overflow-wrap: break-word;
 }
 
+@media (min-width: 1200px) {
+  .prosthesis__inner {
+    grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+    gap: 56px;
+  }
+}
+
 /* Consultation info */
 .consultation-info {
   background: var(--color-bg);
   padding: 56px 0 32px;
   text-align: center;
+}
+
+.prosthesis + .consultation-info {
+  padding-top: 28px;
 }
 
 .consultation-info__steps {
@@ -1351,11 +1410,13 @@ body.no-scroll {
 
   .prosthesis__inner {
     grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
   }
 
   .prosthesis__media {
-    max-width: 320px;
-    margin-inline: auto;
+    width: 100%;
+    max-width: none;
   }
 }
 
@@ -1465,12 +1526,50 @@ body.no-scroll {
     grid-template-columns: 1fr;
   }
 
+  .hero__title-lead {
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.1;
+  }
+
+  .hero__title .hero__highlight {
+    font-size: clamp(20px, 5.5vw, 26px);
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  }
+
+  .hero__title-tags-sep {
+    font-size: 18px;
+  }
+
+  .hero__subtitle {
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  .hero__subtitle .hero__highlight {
+    font-size: 19px;
+    display: inline-block;
+    margin: 2px 0;
+    padding: 0 4px;
+    border-radius: 4px;
+    background: rgba(227, 153, 19, 0.18);
+    box-shadow: inset 0 -2px 0 var(--color-accent);
+    white-space: normal;
+  }
+
   .all-on-4__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .prosthesis__grid {
     grid-template-columns: 1fr;
+  }
+
+  .prosthesis__title {
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.4;
   }
 
   .appointments__timeline {
