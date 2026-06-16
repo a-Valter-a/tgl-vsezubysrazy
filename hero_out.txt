@@ -1,0 +1,26 @@
+﻿python : C:\Users\nikar\OneDrive\Desktop\tgl-vsezubysrazy\analyze_hero.py:27: DeprecationWarning: support for supplying
+ keyword arguments to pathlib.PurePath is deprecated and scheduled for removal in Python 3.14
+C:\Users\nikar\AppData\Local\Temp\ps-script-640cad81-2210-41a1-9588-0b6bf9bc0721.ps1:106 знак:56
++ ... eDrive\Desktop\tgl-vsezubysrazy"; python analyze_hero.py 2>&1 | Out-F ...
++                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\nikar\... in Python 3.14:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Path("hero_detail.txt", "w", encoding="utf-8").write_text(block[:15000])
+fs=28:  <img class='tn-atom__img t-img' data-original='https://static.tildacdn.com/tild3266-3538-4132-b166-663133373264/Arc.svg'
+src='https://static.tildacdn.com/tild3266-3538-4132-b166-663133373264/Arc.svg'
+
+--- images in hero ---
+
+--- button ---
+data-elem-type='button' data-field-top-value="439" data-field-left-value="392" data-field-height-value="100" data-field-width-value="334" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="fixedsize" data-field-fontsize-value="22" data-field-top-res-320-value="266" data-field-left-res-320-value="34"
+Traceback (most recent call last):
+  File "C:\Users\nikar\OneDrive\Desktop\tgl-vsezubysrazy\analyze_hero.py", line 27, in <module>
+    Path("hero_detail.txt", "w", encoding="utf-8").write_text(block[:15000])
+  File "C:\Users\nikar\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nikar\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'hero_detail.txt\\w'
