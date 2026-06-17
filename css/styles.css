@@ -3,7 +3,10 @@
     --color-primary-dark: #0c54a0;
     --color-teal: #1e6c8e;
     --color-teal-dark: #01737d;
-    --color-accent: #e39913;
+    --color-accent: #f7d858;
+    --color-accent-hover: #ecc23a;
+    --color-accent-text: #122a3d;
+    --color-accent-glow: rgba(247, 216, 88, 0.52);
     --color-bg: #e2e8ef;
     --color-bg-light: #f6f6f6;
     --color-text: #212121;
@@ -102,25 +105,183 @@ input {
 
 .btn--accent {
     background: var(--color-accent);
-    color: var(--color-white);
+    color: var(--color-accent-text);
     font-size: 18px;
+    font-weight: 700;
     padding: 20px 36px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 6px 22px var(--color-accent-glow),
+        0 2px 8px rgba(18, 42, 61, 0.16);
 }
 
 .btn--accent:hover {
-    background: #c8870f;
+    background: var(--color-accent-hover);
 }
 
-.btn--call {
-    background: var(--color-accent);
-    color: var(--color-white);
-    padding: 14px 24px;
-    font-size: 15px;
-    white-space: nowrap;
+/* CTA: shimmer + hover lift (hero — чуть сильнее свечение) */
+.btn--accent,
+.btn--hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.btn--call:hover {
-    background: #c8870f;
+.btn--accent > *,
+.btn--hero > *,
+.btn--pulse > * {
+    position: relative;
+    z-index: 1;
+}
+
+.btn--accent::after,
+.btn--hero::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 38%,
+        rgba(255, 255, 255, 0.55) 50%,
+        transparent 62%
+    );
+    transform: translateX(-130%) skewX(-12deg);
+    pointer-events: none;
+}
+
+.header__btn.btn--accent::after {
+    animation: btn-shimmer 6.5s linear infinite;
+}
+
+.btn--accent:not(.header__btn)::after,
+.btn--hero::after {
+    animation: btn-shimmer 6.5s linear 3.4s infinite;
+}
+
+.btn--hero {
+    animation: btn-glow-pulse 2.8s ease-in-out infinite;
+}
+
+.btn--accent:hover,
+.btn--hero:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 10px 28px rgba(247, 216, 88, 0.62),
+        0 4px 12px rgba(18, 42, 61, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn--hero:hover {
+        animation: none;
+    }
+}
+
+.btn--accent:active,
+.btn--hero:active {
+    transform: translateY(-1px);
+    transition-duration: 0.08s;
+}
+
+/* Заметная пульсация для ключевых CTA (работает без hover — важно для мобилки) */
+.btn--pulse {
+    overflow: visible;
+    animation: btn-pulse-glow 2.2s ease-in-out infinite;
+}
+
+.btn--accent.btn--pulse::after {
+    display: none;
+}
+
+.btn--pulse::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    z-index: 0;
+    border: 2px solid rgba(247, 216, 88, 0.75);
+    border-radius: inherit;
+    pointer-events: none;
+    animation: btn-pulse-ring 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes btn-pulse-glow {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 6px 20px rgba(247, 216, 88, 0.5),
+            0 2px 8px rgba(18, 42, 61, 0.16);
+    }
+    50% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            0 12px 36px rgba(247, 216, 88, 0.88),
+            0 0 0 6px rgba(247, 216, 88, 0.3);
+    }
+}
+
+@keyframes btn-pulse-ring {
+    0% {
+        opacity: 0.85;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.14);
+    }
+}
+
+@keyframes btn-shimmer {
+    0% {
+        transform: translateX(-130%) skewX(-12deg);
+    }
+    22% {
+        transform: translateX(130%) skewX(-12deg);
+    }
+    22.01%,
+    100% {
+        transform: translateX(-130%) skewX(-12deg);
+    }
+}
+
+@keyframes btn-glow-pulse {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 8px 26px var(--color-accent-glow),
+            0 3px 10px rgba(18, 42, 61, 0.18);
+    }
+    50% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 10px 34px rgba(247, 216, 88, 0.72),
+            0 4px 14px rgba(18, 42, 61, 0.22);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn--accent::after,
+    .btn--hero::after,
+    .btn--hero {
+        animation: none;
+    }
+
+    .btn--accent:hover,
+    .btn--hero:hover {
+        transform: none;
+    }
+
+    .btn--pulse,
+    .btn--pulse::before {
+        animation: none;
+    }
 }
 
 .btn--ghost {
@@ -330,6 +491,49 @@ input {
     -webkit-mask-image: linear-gradient(to left, #000 70%, transparent 100%);
 }
 
+@media (min-width: 1200px) {
+    .hero__bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+            90deg,
+            rgba(61, 141, 179, 0.88) 0%,
+            rgba(72, 152, 188, 0.48) 22%,
+            rgba(100, 175, 205, 0.18) 40%,
+            transparent 54%
+        );
+    }
+
+    .hero__bg-doctor {
+        left: 50%;
+        right: auto;
+        width: 50%;
+        max-width: none;
+        object-position: center top;
+        mask-image: linear-gradient(
+            to left,
+            #000 0%,
+            #000 46%,
+            rgba(0, 0, 0, 0.82) 58%,
+            rgba(0, 0, 0, 0.45) 72%,
+            rgba(0, 0, 0, 0.12) 86%,
+            transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            to left,
+            #000 0%,
+            #000 46%,
+            rgba(0, 0, 0, 0.82) 58%,
+            rgba(0, 0, 0, 0.45) 72%,
+            rgba(0, 0, 0, 0.12) 86%,
+            transparent 100%
+        );
+    }
+}
+
 .hero__inner {
     position: relative;
     z-index: 3;
@@ -455,7 +659,8 @@ input {
 
 .hero__card-icon {
     width: 56px;
-    height: auto;
+    height: 56px;
+    object-fit: contain;
 }
 
 .hero__card-text {
@@ -496,16 +701,19 @@ input {
 
 .btn--hero {
     background: var(--color-accent);
-    color: var(--color-white);
+    color: var(--color-accent-text);
     font-size: clamp(15px, 1.8vw, 20px);
-    font-weight: 600;
+    font-weight: 700;
     padding: 18px 28px;
     border-radius: 50px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 8px 26px var(--color-accent-glow),
+        0 3px 10px rgba(18, 42, 61, 0.18);
 }
 
 .btn--hero:hover {
-    background: #c8870f;
+    background: var(--color-accent-hover);
 }
 
 .hero__btn-icon {
@@ -574,6 +782,16 @@ input {
     gap: 36px;
 }
 
+.doctor__title {
+    margin: 0;
+    width: 100%;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
 .doctor__layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
@@ -593,19 +811,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
     min-width: 0;
-}
-
-.doctor__title {
-    margin: 0;
-    width: 100%;
-    max-width: 320px;
-    font-size: clamp(24px, 2.6vw, 34px);
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: center;
-    overflow-wrap: break-word;
 }
 
 .doctor__badges {
@@ -819,10 +1025,6 @@ input {
     padding: 56px 0;
 }
 
-.prosthesis:has(+ .consultation-info) {
-    padding-bottom: 28px;
-}
-
 .prosthesis__inner {
     display: grid;
     grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
@@ -905,51 +1107,6 @@ input {
     }
 }
 
-/* Consultation info */
-.consultation-info {
-    background: var(--color-bg);
-    padding: 56px 0 32px;
-    text-align: center;
-}
-
-.prosthesis + .consultation-info {
-    padding-top: 28px;
-}
-
-.consultation-info__steps {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 16px;
-    margin-bottom: 24px;
-    font-size: 14px;
-    color: var(--color-text-muted);
-}
-
-.consultation-info__steps span:not(:last-child)::after {
-    content: " ·";
-}
-
-.consultation-info__title {
-    margin: 0 0 16px;
-    font-size: clamp(22px, 3vw, 32px);
-    font-weight: 700;
-    overflow-wrap: break-word;
-}
-
-.consultation-info__hours {
-    margin: 0 0 8px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.consultation-info__phone {
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 700;
-    color: var(--color-teal-dark);
-    text-decoration: none;
-}
-
 /* Consultation form */
 .consultation {
     background: linear-gradient(0.434turn, var(--color-primary) 0%, rgb(38, 76, 120) 100%);
@@ -958,7 +1115,26 @@ input {
 
 .consultation__inner {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.consultation__steps {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 8px 16px;
+    max-width: min(100%, 720px);
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+}
+
+.consultation__steps span:not(:last-child)::after {
+    content: " ·";
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .consultation__form {
@@ -967,6 +1143,7 @@ input {
     background: var(--color-white);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow);
+    overflow: visible;
 }
 
 .form__label-top {
@@ -1040,6 +1217,11 @@ input {
 .form__submit {
     width: 100%;
     margin-top: 8px;
+}
+
+.consultation .form__submit.btn--accent {
+    font-size: clamp(15px, 4vw, 18px);
+    padding: 18px 24px;
 }
 
 .form__policy {
@@ -1273,11 +1455,13 @@ input {
 
 .appointments__step {
     position: relative;
+    display: flex;
+    flex-direction: column;
     padding: 28px 20px;
     background: var(--color-bg);
     border-radius: var(--radius-sm);
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .appointments__step-num {
@@ -1299,15 +1483,40 @@ input {
 }
 
 .appointments__step-list {
-    margin: 0 0 12px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
     padding-left: 18px;
     font-size: 14px;
     color: var(--color-text-muted);
 }
 
 .appointments__step-list li {
-    margin-bottom: 6px;
+    margin-bottom: 0;
     overflow-wrap: break-word;
+}
+
+.appointments__step-img {
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 280px;
+    height: 240px;
+    margin: auto auto 0;
+    padding-top: 24px;
+    object-fit: contain;
+    border-radius: 16px;
+    -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image:
+        linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    filter: drop-shadow(0 6px 16px rgba(30, 58, 78, 0.1));
 }
 
 .appointments__step-result {
@@ -1377,6 +1586,71 @@ input {
     color: var(--color-text);
 }
 
+/* Legal pages */
+.legal-page {
+    padding: 40px 0 64px;
+    background: var(--color-white);
+}
+
+.legal-page__inner {
+    max-width: 820px;
+}
+
+.legal-page__title {
+    margin: 0 0 32px;
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-teal-dark);
+}
+
+.legal-page__content h2 {
+    margin: 28px 0 12px;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+.legal-page__content h2:first-child {
+    margin-top: 0;
+}
+
+.legal-page__content p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text);
+}
+
+.legal-page__content ul {
+    margin: 0 0 12px;
+    padding-left: 1.25em;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.legal-page__content li {
+    margin-bottom: 6px;
+}
+
+.legal-page__content a {
+    color: var(--color-primary);
+}
+
+.legal-page__back {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.legal-page__back:hover {
+    text-decoration: underline;
+}
+
 .footer__contacts {
     text-align: right;
     min-width: 260px;
@@ -1391,17 +1665,6 @@ input {
     margin-bottom: 16px;
     white-space: nowrap;
     letter-spacing: -0.01em;
-}
-
-.footer__licenses {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    margin-bottom: 12px;
-}
-
-.footer__licenses img {
-    width: 60px;
 }
 
 /* Popups */
@@ -1619,7 +1882,7 @@ body.no-scroll {
 
     .prosthesis__inner {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 18px;
         align-items: start;
     }
 
@@ -1629,14 +1892,14 @@ body.no-scroll {
 
     .prosthesis__title {
         order: -2;
-        margin-bottom: 14px;
+        margin-bottom: 0;
     }
 
     .prosthesis__media {
         order: -1;
         width: 100%;
         max-width: none;
-        margin-bottom: 4px;
+        margin-bottom: 0;
     }
 }
 
@@ -1664,7 +1927,23 @@ body.no-scroll {
     }
 
     .appointments__step {
+        display: block;
         padding: 24px 16px;
+    }
+
+    .appointments__step-list {
+        display: block;
+        flex: none;
+        margin: 0 0 12px;
+    }
+
+    .appointments__step-list li {
+        margin-bottom: 6px;
+    }
+
+    .appointments__step-img {
+        height: auto;
+        margin: 24px auto 0;
     }
 
     .header__inner {
@@ -1757,11 +2036,9 @@ body.no-scroll {
 
     .doctor__visual {
         order: -1;
-        gap: 14px;
     }
 
     .doctor__title {
-        max-width: none;
         font-size: clamp(22px, 6vw, 28px);
         padding-inline: 4px;
     }
@@ -1802,6 +2079,67 @@ body.no-scroll {
     .before-after__visual {
         justify-self: center;
         max-width: 400px;
+    }
+
+    .before-after {
+        padding-bottom: 24px;
+    }
+
+    .prosthesis {
+        padding: 18px 0 10px;
+        background: linear-gradient(180deg, #d2dde7 0%, var(--color-bg) 52px);
+    }
+
+    .prosthesis__inner {
+        gap: 12px;
+    }
+
+    .prosthesis__title {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        font-size: clamp(19px, 5vw, 24px);
+        line-height: 1.3;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .prosthesis__media img {
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: center 40%;
+        border-radius: 14px;
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.45),
+            0 10px 28px rgba(30, 58, 78, 0.12);
+        -webkit-mask-image:
+            linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        mask-image:
+            linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        -webkit-mask-composite: source-in;
+        mask-composite: intersect;
+    }
+
+    .prosthesis__text {
+        margin: 0 0 12px;
+        font-size: 15px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .prosthesis__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .prosthesis__icon {
+        width: 44px;
+    }
+
+    .prosthesis__item-title {
+        font-size: 14px;
     }
 
     .hero__cards {
@@ -1850,15 +2188,6 @@ body.no-scroll {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .prosthesis__grid {
-        grid-template-columns: 1fr;
-    }
-
-    .prosthesis__title {
-        font-size: clamp(22px, 5.5vw, 28px);
-        line-height: 1.4;
-    }
-
     .appointments__timeline {
         grid-template-columns: 1fr;
     }
@@ -1875,10 +2204,6 @@ body.no-scroll {
 
     .footer__phone {
         white-space: normal;
-    }
-
-    .footer__licenses {
-        justify-content: flex-start;
     }
 
     .floating-phone {

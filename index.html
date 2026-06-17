@@ -30,8 +30,8 @@
       </div>
 
       <div class="header__actions">
-        <a class="btn btn--call" href="tel:+78482386085">Позвонить</a>
-        <button class="header__btn btn btn--primary" type="button" data-popup-open="popup-form">Записаться</button>
+        <a class="btn btn--primary" href="tel:+78482386085">Позвонить</a>
+        <button class="header__btn btn btn--accent" type="button" data-popup-open="popup-form">Записаться</button>
       </div>
     </div>
   </header>
@@ -62,15 +62,15 @@
 
           <div class="hero__cards">
             <article class="hero__card">
-              <img class="hero__card-icon" src="assets/images/shield_9727307_1.png" alt="" width="56" height="56">
+              <img class="hero__card-icon" src="assets/images/hero-card-no-fees.png" alt="" width="56" height="56">
               <p class="hero__card-text">Без переплат и&nbsp;скрытых платежей</p>
             </article>
             <article class="hero__card">
-              <img class="hero__card-icon" src="assets/images/healthy-tooth_972714.png" alt="" width="56" height="56">
+              <img class="hero__card-icon" src="assets/images/hero-card-microscope.png" alt="" width="56" height="56">
               <p class="hero__card-text">Лечение под микроскопом</p>
             </article>
             <article class="hero__card">
-              <img class="hero__card-icon" src="assets/images/x-ray_4728529.png" alt="" width="56" height="56">
+              <img class="hero__card-icon" src="assets/images/hero-card-ct.png" alt="" width="56" height="56">
               <p class="hero__card-text">Бесплатно КТ прямо в клинике</p>
             </article>
           </div>
@@ -103,6 +103,8 @@
     <!-- DOCTOR -->
     <section class="doctor">
       <div class="doctor__inner container">
+        <h2 class="doctor__title">Качественное лечение должно быть доступным!</h2>
+
         <div class="doctor__layout">
           <div class="doctor__content">
             <div class="doctor__badges">
@@ -132,7 +134,6 @@
           </div>
 
           <div class="doctor__visual">
-            <h2 class="doctor__title">Качественное лечение должно быть доступным!</h2>
             <figure class="doctor__figure">
               <img class="doctor__photo" src="assets/images/doctor.jpg" alt="Артемьев Юрий Витальевич" width="320" height="417">
               <figcaption class="doctor__name">Артемьев Юрий Витальевич</figcaption>
@@ -199,24 +200,15 @@
       </div>
     </section>
 
-    <!-- CONSULTATION INFO -->
-    <section class="consultation-info">
-      <div class="consultation-info__inner container">
-        <div class="consultation-info__steps">
+    <!-- CONSULTATION FORM -->
+    <section class="consultation" id="consultation">
+      <div class="consultation__inner container">
+        <div class="consultation__steps">
           <span>Консультация</span>
           <span>Обследование и 3D-снимок</span>
           <span>Моделирование улыбки</span>
           <span>Заключение и план лечения в 3-х вариантах от ведущих стоматологов</span>
         </div>
-        <h2 class="consultation-info__title">Бесплатно пройдите диагностику и&nbsp;получите план лечения с&nbsp;точной стоимостью «под ключ»</h2>
-        <p class="consultation-info__hours">Ежедневно 9:00 – 21:00</p>
-        <a class="consultation-info__phone" href="tel:+78482386085">+7 (848) 238-60-85</a>
-      </div>
-    </section>
-
-    <!-- CONSULTATION FORM -->
-    <section class="consultation" id="consultation">
-      <div class="consultation__inner container">
         <form class="consultation__form form" data-no-submit>
           <p class="form__label-top">Закрепим за вашим номером скидку</p>
           <h3 class="form__title">Забронируйте цену по акции</h3>
@@ -229,7 +221,7 @@
 
           <label class="form__checkbox">
             <input type="checkbox" name="personal-data" required>
-            <span>Я согласен на <a href="/obrabotka" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
+            <span>Я согласен на <a href="obrabotka.html" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
           </label>
 
           <label class="form__checkbox">
@@ -237,7 +229,7 @@
             <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
           </label>
 
-          <button class="form__submit btn btn--primary" type="submit">Забронируйте цену по акции</button>
+          <button class="form__submit btn btn--accent btn--pulse" type="submit">Забронируйте цену по акции</button>
 
           <div class="form__success form-success" hidden>
             <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
@@ -357,7 +349,7 @@
 
               <label class="form__checkbox">
                 <input type="checkbox" name="personal-data" required>
-                <span>Я согласен на <a href="/obrabotka" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
+                <span>Я согласен на <a href="obrabotka.html" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
               </label>
 
               <label class="form__checkbox">
@@ -365,7 +357,7 @@
                 <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
               </label>
 
-              <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="/policy" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
+              <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="policy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
 
               <div class="form__success form-success" hidden>
                 <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
@@ -389,19 +381,19 @@
 
         <div class="all-on-4__grid">
           <article class="all-on-4__item">
-            <img class="all-on-4__icon" src="assets/images/32247023_m024t0224_d.png" alt="" width="66" height="66">
+            <img class="all-on-4__icon" src="assets/images/all-on-4-icon-warranty.png" alt="" width="66" height="66">
             <h3 class="all-on-4__item-title">Пожизненная гарантия на импланты от производителя</h3>
           </article>
           <article class="all-on-4__item">
-            <img class="all-on-4__icon" src="assets/images/close-up-dentist-hol.jpg" alt="" width="66" height="66">
+            <img class="all-on-4__icon" src="assets/images/all-on-4-icon-anesthesia.png" alt="" width="66" height="66">
             <h3 class="all-on-4__item-title">Импортная анестезия и максимальный комфорт даже в сложных случаях</h3>
           </article>
           <article class="all-on-4__item">
-            <img class="all-on-4__icon" src="assets/images/1653.jpg" alt="" width="66" height="66">
+            <img class="all-on-4__icon" src="assets/images/all-on-4-icon-success.png" alt="" width="66" height="66">
             <h3 class="all-on-4__item-title">Приживаемость до 99,8%</h3>
           </article>
           <article class="all-on-4__item">
-            <img class="all-on-4__icon all-on-4__icon--logo" src="assets/images/logo-dental-formula.png" alt="" width="66" height="66">
+            <img class="all-on-4__icon" src="assets/images/all-on-4-icon-payment.png" alt="" width="66" height="66">
             <h3 class="all-on-4__item-title">Доступная стоимость и возможность оплачивать не сразу всю сумму</h3>
           </article>
         </div>
@@ -438,7 +430,7 @@
               <li>Бесплатно сделает 3D-снимок, чтобы оценить состояние костной ткани и исключить противопоказания</li>
               <li>На основе клинической картины врач даст заключение и предложит 2-3 варианта восстановления зубов</li>
             </ul>
-            <p class="appointments__step-result">В итоге вы БЕСПЛАТНО получаете: Расширенный план лечения в 2-3х вариантах «под ключ» с окончательной стоимостью</p>
+            <img class="appointments__step-img" src="assets/images/appointments-diagnostics.png" alt="Диагностика и планирование лечения" width="1254" height="1254" loading="lazy">
           </li>
 
           <li class="appointments__step">
@@ -448,7 +440,10 @@
               <li>Врач удалит разрушенные и шатающиеся зубы</li>
               <li>Пролечит кариес и снимет отложения в десневых кармашках</li>
               <li>Устранит воспаления и очаги инфекции во рту</li>
+              <li>Проведём профессиональную гигиену под микроскопом</li>
+              <li>Обработаем ткани антисептиками для полной стерильности</li>
             </ul>
+            <img class="appointments__step-img" src="assets/images/appointments-sanitation.png" alt="Врач проводит санацию ротовой полости" width="1254" height="1254" loading="lazy">
           </li>
 
           <li class="appointments__step">
@@ -457,7 +452,10 @@
             <ul class="appointments__step-list">
               <li>Имплантолог наложит хирургический шаблон и установит импланты строго под расчитанным углом</li>
               <li>Ортопед зафиксирует на импланты ваш анатомически точный протез</li>
+              <li>Проверим идеальную посадку протеза на имплантах</li>
+              <li>Дадим рекомендации по уходу за новой улыбкой</li>
             </ul>
+            <img class="appointments__step-img" src="assets/images/appointments-implant.png" alt="Установка имплантов и протеза" width="1254" height="1254" loading="lazy">
           </li>
         </ol>
 
@@ -498,15 +496,11 @@
         клиника по протезированию №1</p>
         <p>Лицензия на осуществление медицинской деятельности №041-01125-54/00269036<br>
         ООО «ДЕЛЬТА» ОГРН 1215400039282 / ИНН 5406815525 / КПП 540601001</p>
-        <a class="footer__policy" href="/policy" target="_blank" rel="noopener noreferrer"><strong><u>Политика конфиденциальности</u></strong></a>
+        <a class="footer__policy" href="policy.html"><strong><u>Политика конфиденциальности</u></strong></a>
       </div>
 
       <div class="footer__contacts">
         <a class="footer__phone" href="tel:+78482386085">+7 (848) 238-60-85</a>
-        <div class="footer__licenses">
-          <img src="assets/images/1.png" alt="Лицензия" width="100" height="141">
-          <img src="assets/images/2.png" alt="Лицензия" width="100" height="141">
-        </div>
       </div>
     </div>
   </footer>
@@ -532,7 +526,7 @@
 
         <label class="form__checkbox">
           <input type="checkbox" name="personal-data" required>
-          <span>Я согласен на <a href="/obrabotka" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
+          <span>Я согласен на <a href="obrabotka.html" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
         </label>
 
         <label class="form__checkbox">
@@ -663,7 +657,7 @@
 
             <label class="form__checkbox">
               <input type="checkbox" name="personal-data" required>
-              <span>Я согласен на <a href="/obrabotka" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
+              <span>Я согласен на <a href="obrabotka.html" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></span>
             </label>
 
             <label class="form__checkbox">
@@ -671,7 +665,7 @@
               <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
             </label>
 
-            <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="/policy" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
+            <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="policy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
 
             <div class="form__success form-success" hidden>
               <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
@@ -690,7 +684,7 @@
 
   <!-- COOKIE BANNER -->
   <div class="cookie-banner" role="dialog" aria-label="Уведомление о cookie">
-    <p class="cookie-banner__text">Мы используем cookie, <a href="/policy" target="_blank" rel="noopener noreferrer">подробнее</a></p>
+    <p class="cookie-banner__text">Мы используем cookie, <a href="policy.html" target="_blank" rel="noopener noreferrer">подробнее</a></p>
     <button class="cookie-banner__ok btn" type="button">OK</button>
   </div>
 
