@@ -124,7 +124,6 @@ input {
 .btn--hero {
     position: relative;
     overflow: hidden;
-    isolation: isolate;
     transition:
         background 0.2s,
         color 0.2s,
@@ -151,20 +150,26 @@ input {
         rgba(255, 255, 255, 0.55) 50%,
         transparent 62%
     );
-    transform: translateX(-130%) skewX(-12deg);
+    transform: translate3d(-130%, 0, 0) skewX(-12deg);
     pointer-events: none;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .header__btn.btn--accent::after {
+    -webkit-animation: btn-shimmer 6.5s linear infinite;
     animation: btn-shimmer 6.5s linear infinite;
 }
 
-.btn--accent:not(.header__btn)::after,
+.btn--accent:not(.header__btn):not(.btn--pulse)::after,
 .btn--hero::after {
+    -webkit-animation: btn-shimmer 6.5s linear 3.4s infinite;
     animation: btn-shimmer 6.5s linear 3.4s infinite;
 }
 
 .btn--hero {
+    -webkit-animation: btn-glow-pulse 2.8s ease-in-out infinite;
     animation: btn-glow-pulse 2.8s ease-in-out infinite;
 }
 
@@ -192,6 +197,7 @@ input {
 /* Заметная пульсация для ключевых CTA (работает без hover — важно для мобилки) */
 .btn--pulse {
     overflow: visible;
+    -webkit-animation: btn-pulse-glow 2.2s ease-in-out infinite;
     animation: btn-pulse-glow 2.2s ease-in-out infinite;
 }
 
@@ -207,7 +213,24 @@ input {
     border: 2px solid rgba(247, 216, 88, 0.75);
     border-radius: inherit;
     pointer-events: none;
+    -webkit-animation: btn-pulse-ring 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
     animation: btn-pulse-ring 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@-webkit-keyframes btn-pulse-glow {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 6px 20px rgba(247, 216, 88, 0.5),
+            0 2px 8px rgba(18, 42, 61, 0.16);
+    }
+    50% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            0 12px 36px rgba(247, 216, 88, 0.88),
+            0 0 0 6px rgba(247, 216, 88, 0.3);
+    }
 }
 
 @keyframes btn-pulse-glow {
@@ -226,6 +249,19 @@ input {
     }
 }
 
+@-webkit-keyframes btn-pulse-ring {
+    0% {
+        opacity: 0.85;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.14);
+        transform: scale(1.14);
+    }
+}
+
 @keyframes btn-pulse-ring {
     0% {
         opacity: 0.85;
@@ -237,16 +273,48 @@ input {
     }
 }
 
-@keyframes btn-shimmer {
+@-webkit-keyframes btn-shimmer {
     0% {
-        transform: translateX(-130%) skewX(-12deg);
+        -webkit-transform: translate3d(-130%, 0, 0) skewX(-12deg);
+        transform: translate3d(-130%, 0, 0) skewX(-12deg);
     }
     22% {
-        transform: translateX(130%) skewX(-12deg);
+        -webkit-transform: translate3d(130%, 0, 0) skewX(-12deg);
+        transform: translate3d(130%, 0, 0) skewX(-12deg);
     }
     22.01%,
     100% {
-        transform: translateX(-130%) skewX(-12deg);
+        -webkit-transform: translate3d(-130%, 0, 0) skewX(-12deg);
+        transform: translate3d(-130%, 0, 0) skewX(-12deg);
+    }
+}
+
+@keyframes btn-shimmer {
+    0% {
+        transform: translate3d(-130%, 0, 0) skewX(-12deg);
+    }
+    22% {
+        transform: translate3d(130%, 0, 0) skewX(-12deg);
+    }
+    22.01%,
+    100% {
+        transform: translate3d(-130%, 0, 0) skewX(-12deg);
+    }
+}
+
+@-webkit-keyframes btn-glow-pulse {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 8px 26px var(--color-accent-glow),
+            0 3px 10px rgba(18, 42, 61, 0.18);
+    }
+    50% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.42),
+            0 10px 34px rgba(247, 216, 88, 0.72),
+            0 4px 14px rgba(18, 42, 61, 0.22);
     }
 }
 
@@ -270,6 +338,7 @@ input {
     .btn--accent::after,
     .btn--hero::after,
     .btn--hero {
+        -webkit-animation: none;
         animation: none;
     }
 
@@ -280,7 +349,50 @@ input {
 
     .btn--pulse,
     .btn--pulse::before {
+        -webkit-animation: none;
         animation: none;
+    }
+
+    .marquee__track {
+        -webkit-animation: none;
+        animation: none;
+    }
+}
+
+/* Тач-устройства: заметнее перелив, надёжный запуск анимаций в iOS Safari */
+@media (hover: none) and (pointer: coarse) {
+    .btn--accent:not(.btn--pulse)::after,
+    .btn--hero::after {
+        background: linear-gradient(
+            105deg,
+            transparent 32%,
+            rgba(255, 255, 255, 0.72) 50%,
+            transparent 68%
+        );
+        -webkit-animation: none;
+        animation: none;
+    }
+
+    .btn--accent:not(.btn--pulse).is-shimmer-active::after,
+    .btn--hero.is-shimmer-active::after {
+        -webkit-animation: btn-shimmer 4.5s linear infinite;
+        animation: btn-shimmer 4.5s linear infinite;
+    }
+
+    .header__btn.btn--accent.is-shimmer-active::after {
+        -webkit-animation-delay: 0s;
+        animation-delay: 0s;
+    }
+
+    .btn--accent:not(.header__btn):not(.btn--pulse).is-shimmer-active::after,
+    .btn--hero.is-shimmer-active::after {
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+    }
+
+    .marquee__track {
+        -webkit-animation-duration: 16s;
+        animation-duration: 16s;
     }
 }
 
@@ -737,8 +849,12 @@ input {
     gap: 32px;
     height: 100%;
     width: max-content;
+    -webkit-animation: marquee 20s linear infinite;
     animation: marquee 20s linear infinite;
     padding-inline: 16px;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .marquee__link {
@@ -761,12 +877,23 @@ input {
     flex-shrink: 0;
 }
 
-@keyframes marquee {
+@-webkit-keyframes marquee {
     from {
-        transform: translateX(0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translateX(-50%);
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, 0, 0);
     }
 }
 

@@ -173,9 +173,41 @@
   }
 
   /* Duplicate marquee content for seamless loop */
+  function kickMarqueeAnimations() {
+    document.querySelectorAll(".marquee__track").forEach(function (track) {
+      track.style.webkitAnimation = "none";
+      track.style.animation = "none";
+      void track.offsetHeight;
+      track.style.removeProperty("-webkit-animation");
+      track.style.removeProperty("animation");
+    });
+  }
+
   document.querySelectorAll(".marquee__track").forEach(function (track) {
     track.innerHTML = track.innerHTML + track.innerHTML;
   });
+
+  kickMarqueeAnimations();
+  requestAnimationFrame(kickMarqueeAnimations);
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) {
+      kickMarqueeAnimations();
+      kickButtonShimmer();
+    }
+  });
+
+  /* iOS Safari: перезапуск перелива на псевдоэлементах кнопок */
+  function kickButtonShimmer() {
+    document.querySelectorAll(".btn--accent:not(.btn--pulse), .btn--hero").forEach(function (btn) {
+      btn.classList.remove("is-shimmer-active");
+      void btn.offsetHeight;
+      btn.classList.add("is-shimmer-active");
+    });
+  }
+
+  kickButtonShimmer();
+  requestAnimationFrame(kickButtonShimmer);
 
   /* Scroll to top */
   var scrollTopBtn = document.querySelector(".scroll-top");
