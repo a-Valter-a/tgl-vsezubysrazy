@@ -57,35 +57,110 @@
   });
 
   /* Phone mask */
-  function formatPhone(value) {
+  function normalizePhoneDigits(value) {
     var digits = value.replace(/\D/g, "");
-    if (digits.startsWith("8")) digits = "7" + digits.slice(1);
-    if (!digits.startsWith("7")) digits = "7" + digits;
-    digits = digits.slice(0, 11);
+    if (!digits) return "";
+    if (digits.charAt(0) === "8") digits = "7" + digits.slice(1);
+    if (digits.charAt(0) !== "7") digits = "7" + digits;
+    return digits.slice(0, 11);
+  }
 
-    var result = "+7";
-    if (digits.length > 1) result += " (" + digits.slice(1, 4);
-    if (digits.length >= 4) result += ") " + digits.slice(4, 7);
-    if (digits.length >= 7) result += "-" + digits.slice(7, 9);
-    if (digits.length >= 9) result += "-" + digits.slice(9, 11);
+  function formatPhoneFromDigits(digits) {
+    if (!digits) return "";
+    if (digits.length === 1) return "+7 (";
+
+    var result = "+7 (" + digits.slice(1, 4);
+    if (digits.length > 4) result += ") " + digits.slice(4, 7);
+    if (digits.length > 7) result += "-" + digits.slice(7, 9);
+    if (digits.length > 9) result += "-" + digits.slice(9, 11);
     return result;
   }
 
+  function countDigitsBefore(value, index) {
+    var count = 0;
+    for (var i = 0; i < index && i < value.length; i++) {
+      if (/\d/.test(value.charAt(i))) count++;
+    }
+    return count;
+  }
+
+  function caretAfterDigits(formatted, digitCount) {
+    if (!formatted) return 0;
+    if (digitCount <= 1) return formatted.length;
+
+    var nationalTarget = digitCount - 1;
+    var nationalSeen = 0;
+
+    for (var i = 0; i < formatted.length; i++) {
+      if (!/\d/.test(formatted.charAt(i))) continue;
+      if (i === 1) continue;
+
+      nationalSeen++;
+      if (nationalSeen === nationalTarget) return i + 1;
+    }
+
+    return formatted.length;
+  }
+
   document.querySelectorAll('input[type="tel"]').forEach(function (input) {
-    input.addEventListener("input", function () {
-      var pos = input.selectionStart;
-      var oldLen = input.value.length;
-      input.value = formatPhone(input.value);
-      var diff = input.value.length - oldLen;
-      input.setSelectionRange(pos + diff, pos + diff);
-    });
+    var snapshot = { value: "", start: 0, end: 0 };
+
+    function rememberState() {
+      snapshot.value = input.value;
+      snapshot.start = input.selectionStart || 0;
+      snapshot.end = input.selectionEnd || 0;
+    }
+
+    function applyMask() {
+      var digitsBefore = countDigitsBefore(snapshot.value, snapshot.start);
+      var wasDeletion = input.value.length < snapshot.value.length;
+      var wasAddition = input.value.length > snapshot.value.length;
+
+      if (wasDeletion && snapshot.start === snapshot.end) {
+        var charBefore = snapshot.value.charAt(snapshot.start - 1);
+        if (charBefore && !/\d/.test(charBefore)) {
+          digitsBefore = Math.max(1, digitsBefore - 1);
+        }
+      }
+
+      if (!input.value.replace(/\D/g, "")) {
+        input.value = "";
+        return;
+      }
+
+      var digits = normalizePhoneDigits(input.value);
+      if (
+        wasDeletion &&
+        digits.length === 1 &&
+        normalizePhoneDigits(snapshot.value).length === 1
+      ) {
+        digits = "";
+      }
+
+      var formatted = formatPhoneFromDigits(digits);
+      input.value = formatted;
+
+      var nextPos = wasAddition
+        ? formatted.length
+        : caretAfterDigits(formatted, digitsBefore);
+      input.setSelectionRange(nextPos, nextPos);
+    }
+
+    input.addEventListener("keydown", rememberState);
+    input.addEventListener("paste", rememberState);
+
+    input.addEventListener("input", applyMask);
 
     input.addEventListener("focus", function () {
-      if (!input.value) input.value = "+7 (";
+      if (!input.value) {
+        input.value = "+7 (";
+        input.setSelectionRange(input.value.length, input.value.length);
+      }
     });
 
     input.addEventListener("blur", function () {
-      if (input.value === "+7 (" || input.value === "+7") input.value = "";
+      var digits = normalizePhoneDigits(input.value);
+      if (digits.length <= 1) input.value = "";
     });
   });
 
