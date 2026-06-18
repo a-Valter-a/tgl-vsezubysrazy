@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <title>Полная имплантация зубов в Тольятти</title>
-  <link rel="icon" type="image/png" href="assets/images/logo-dental-formula.png">
+  <link rel="icon" type="image/png" href="assets/images/favicon-dental-formula.png">
   <link rel="stylesheet" href="https://static.tildacdn.com/css/fonts-tildasans.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -14,23 +14,19 @@
   <!-- HEADER -->
   <header class="header">
     <div class="header__inner container">
-      <a class="header__logo" href="/" aria-label="Зубная Формула">
-        <img src="assets/images/logo-dental-formula.png" alt="Зубная Формула" width="80" height="80">
-        <span class="header__logo-text">
-          <span class="header__logo-name">Зубная Формула</span>
-          <span class="header__logo-tagline">протезирование и имплантация зубов</span>
-        </span>
+      <a class="header__logo" href="/" aria-label="Зубная Формула — центр стоматологии">
+        <img src="assets/images/logo-dental-formula.png" alt="Зубная Формула — центр стоматологии" width="989" height="368" loading="eager">
       </a>
 
       <div class="header__meta">
         <p class="header__hours">Ежедневно 9:00 – 21:00</p>
         <p class="header__address">
-          <span class="header__sticker">клиника по протезированию №1</span>
+          <span class="header__sticker">г. Тольятти, ул. Фрунзе, 8Б (2 этаж)</span>
         </p>
       </div>
 
       <div class="header__actions">
-        <a class="btn btn--primary" href="tel:+78482386085">Позвонить</a>
+        <a class="btn btn--primary" href="tel:+78482386470">Позвонить</a>
         <button class="header__btn btn btn--accent" type="button" data-popup-open="popup-form">Записаться</button>
       </div>
     </div>
@@ -67,17 +63,16 @@
             </article>
             <article class="hero__card">
               <img class="hero__card-icon" src="assets/images/hero-card-microscope.png" alt="" width="56" height="56">
-              <p class="hero__card-text">Лечение под микроскопом</p>
+              <p class="hero__card-text">3D моделирование вашей будущей улыбки</p>
             </article>
             <article class="hero__card">
               <img class="hero__card-icon" src="assets/images/hero-card-ct.png" alt="" width="56" height="56">
-              <p class="hero__card-text">Бесплатно КТ прямо в клинике</p>
+              <p class="hero__card-text">КТ + ИИ расшифровка включены в первичную консультацию</p>
             </article>
           </div>
 
           <div class="hero__promo">
-            <img class="hero__promo-icon" src="assets/images/logo-dental-formula.png" alt="" width="40" height="40">
-            <span class="hero__promo-text"><strong>Акция до&nbsp;30&nbsp;июня</strong></span>
+            <span class="hero__promo-label" data-promo-deadline>Акция до&nbsp;30&nbsp;июня</span>
           </div>
 
           <button class="hero__btn btn btn--hero" type="button" data-popup-open="popup-form">
@@ -117,15 +112,15 @@
 
             <ul class="doctor__values">
               <li class="doctor__value">
-                <img src="assets/images/Star_1.png" alt="" width="28" height="28" aria-hidden="true">
+                <span class="doctor__value-icon" aria-hidden="true"></span>
                 <span>безупречный сервис и результат</span>
               </li>
               <li class="doctor__value">
-                <img src="assets/images/Star_1.png" alt="" width="28" height="28" aria-hidden="true">
+                <span class="doctor__value-icon" aria-hidden="true"></span>
                 <span>цены доступные даже пенсионерам</span>
               </li>
               <li class="doctor__value">
-                <img src="assets/images/Star_1.png" alt="" width="28" height="28" aria-hidden="true">
+                <span class="doctor__value-icon" aria-hidden="true"></span>
                 <span>Ювелирно повторяем цвет, прозрачность, борозды и бугры натуральных зубов</span>
               </li>
             </ul>
@@ -203,13 +198,18 @@
     <!-- CONSULTATION FORM -->
     <section class="consultation" id="consultation">
       <div class="consultation__inner container">
-        <div class="consultation__steps">
-          <span>Консультация</span>
-          <span>Обследование и 3D-снимок</span>
-          <span>Моделирование улыбки</span>
-          <span>Заключение и план лечения в 3-х вариантах от ведущих стоматологов</span>
-        </div>
-        <form class="consultation__form form" data-no-submit>
+        <div class="consultation__layout">
+          <div class="consultation__aside">
+            <h2 class="consultation__heading">Бесплатная консультация&nbsp;включает</h2>
+            <ol class="consultation__steps">
+              <li>Консультация</li>
+              <li>Обследование и 3D-снимок</li>
+              <li>Моделирование улыбки</li>
+              <li>Заключение и план лечения в 3-х вариантах от ведущих стоматологов</li>
+            </ol>
+          </div>
+
+          <form class="consultation__form form" data-no-submit>
           <p class="form__label-top">Закрепим за вашим номером скидку</p>
           <h3 class="form__title">Забронируйте цену по акции</h3>
           <p class="form__hours">Ежедневно 9:00 – 21:00</p>
@@ -226,7 +226,7 @@
 
           <label class="form__checkbox">
             <input type="checkbox" name="newsletter" required>
-            <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
+            <span>Я согласен на получение <a href="rassylka.html" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
           </label>
 
           <button class="form__submit btn btn--accent btn--pulse" type="submit">Забронируйте цену по акции</button>
@@ -234,7 +234,8 @@
           <div class="form__success form-success" hidden>
             <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
           </div>
-        </form>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -354,7 +355,7 @@
 
               <label class="form__checkbox">
                 <input type="checkbox" name="newsletter" required>
-                <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
+                <span>Я согласен на получение <a href="rassylka.html" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
               </label>
 
               <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="policy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
@@ -482,8 +483,7 @@
   <footer class="footer">
     <div class="footer__inner container">
       <a class="footer__logo" href="/">
-        <img src="assets/images/logo-dental-formula.png" alt="Зубная Формула" width="48" height="48">
-        <span class="footer__logo-text">Зубная Формула — протезирование и имплантация зубов</span>
+        <img src="assets/images/logo-dental-formula.png" alt="Зубная Формула — центр стоматологии" width="989" height="368" loading="lazy">
       </a>
 
       <div class="footer__legal">
@@ -492,15 +492,16 @@
       </div>
 
       <div class="footer__company">
-        <p>Dental Formula — протезирование и имплантация зубов<br>
-        клиника по протезированию №1</p>
-        <p>Лицензия на осуществление медицинской деятельности №041-01125-54/00269036<br>
-        ООО «ДЕЛЬТА» ОГРН 1215400039282 / ИНН 5406815525 / КПП 540601001</p>
+        <p>Центр стоматологии Зубная Формула<br>
+        г. Тольятти, ул. Фрунзе, 8Б (2 этаж)</p>
+        <p>Лицензия: Л041-01184-63/03244690<br>
+        ООО «Улыбка Поволжья» ИНН 6320087604 / ОГРН 1256300014112 / КПП 632001001</p>
+        <p>18+ Имеются противопоказания, необходимо проконсультироваться с врачом.</p>
         <a class="footer__policy" href="policy.html"><strong><u>Политика конфиденциальности</u></strong></a>
       </div>
 
       <div class="footer__contacts">
-        <a class="footer__phone" href="tel:+78482386085">+7 (848) 238-60-85</a>
+        <a class="footer__phone" href="tel:+78482386470">+7 (848) 238-64-70</a>
       </div>
     </div>
   </footer>
@@ -531,7 +532,7 @@
 
         <label class="form__checkbox">
           <input type="checkbox" name="newsletter" required>
-          <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
+          <span>Я согласен на получение <a href="rassylka.html" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
         </label>
 
         <button class="form__submit btn btn--primary" type="submit">Получить консультацию</button>
@@ -662,7 +663,7 @@
 
             <label class="form__checkbox">
               <input type="checkbox" name="newsletter" required>
-              <span>Я согласен на получение <a href="/rassylka" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
+              <span>Я согласен на получение <a href="rassylka.html" target="_blank" rel="noopener noreferrer">информационных материалов</a></span>
             </label>
 
             <p class="form__policy">Нажимая на кнопку, вы соглашаетесь с нашей <a href="policy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></p>
@@ -689,7 +690,7 @@
   </div>
 
   <!-- FLOATING PHONE -->
-  <a class="floating-phone" href="tel:+78482386085" aria-label="Позвонить +7 (848) 238-60-85">
+  <a class="floating-phone" href="tel:+78482386470" aria-label="Позвонить +7 (848) 238-64-70">
     <img src="assets/images/__.png" alt="" width="59" height="59">
   </a>
 

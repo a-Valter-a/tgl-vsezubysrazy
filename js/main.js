@@ -172,6 +172,27 @@
     });
   }
 
+  /* Promo deadline: today + 15 days */
+  var PROMO_MONTHS = [
+    "января", "февраля", "марта", "апреля", "мая", "июня",
+    "июля", "августа", "сентября", "октября", "ноября", "декабря"
+  ];
+
+  function getPromoDeadlineDate() {
+    var date = new Date();
+    date.setHours(12, 0, 0, 0);
+    date.setDate(date.getDate() + 15);
+    return date;
+  }
+
+  function formatPromoDeadline(date) {
+    return "Акция до " + date.getDate() + "\u00a0" + PROMO_MONTHS[date.getMonth()];
+  }
+
+  document.querySelectorAll("[data-promo-deadline]").forEach(function (el) {
+    el.textContent = formatPromoDeadline(getPromoDeadlineDate());
+  });
+
   /* Duplicate marquee content for seamless loop */
   function kickMarqueeAnimations() {
     document.querySelectorAll(".marquee__track").forEach(function (track) {
